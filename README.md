@@ -52,19 +52,34 @@ kubectl apply -f config/manager/manager.yaml
 ## Quick Start
 
 1. Create a Cloud Sync application:
+
+### YAML-based Application
 ```yaml
 apiVersion: sync.cloudsync.io/v1alpha1
 kind: Application
 metadata:
-  name: example-app
+  name: example-yaml-app
 spec:
-  source:
-    repoURL: https://github.com/example/repo.git
+  provider:
+    repoUrl: https://github.com/example/repo.git
+    targetPath: kubernetes/
+    targetType: yaml
     targetRevision: HEAD
-    path: kubernetes/
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: default
+```
+
+### Script-based Application
+```yaml
+apiVersion: sync.cloudsync.io/v1alpha1
+kind: Application
+metadata:
+  name: example-script-app
+spec:
+  provider:
+    repoUrl: https://github.com/example/repo.git
+    targetPath: scripts/
+    targetType: script
+    scriptYamlOutput: manifests/output.yaml  # Required when targetType is script
+    targetRevision: HEAD
 ```
 
 2. Apply the configuration:

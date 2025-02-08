@@ -40,7 +40,7 @@ Cloud Sync follows a controller-based architecture:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/cloud-sync.git
+git clone https://github.com/Galactic-Grid/cloud-sync.git
 
 # Install CRDs
 kubectl apply -f config/crd/bases

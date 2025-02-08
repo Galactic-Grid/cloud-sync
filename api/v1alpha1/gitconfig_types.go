@@ -9,6 +9,7 @@ type GitConfigSpec struct {
 	// Repository URL of the Git repository
 	RepoURL string `json:"repoURL"`
 
+	// +optional
 	// Secret containing the credentials to access the Git repository
 	GitAuthSecret string `json:"gitAuthSecret"`
 }

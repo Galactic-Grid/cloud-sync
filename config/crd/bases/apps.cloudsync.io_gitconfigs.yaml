@@ -46,7 +46,6 @@ spec:
                 description: Repository URL of the Git repository
                 type: string
             required:
-            - gitAuthSecret
             - repoURL
             type: object
           status:

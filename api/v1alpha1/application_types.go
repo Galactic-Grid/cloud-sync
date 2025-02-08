@@ -16,6 +16,7 @@ type Application struct {
 	Status ApplicationStatus `json:"status,omitempty"`
 }
 
+// +k8s:deepcopy-gen=true
 // ApplicationSpec defines the desired state of Application
 type ApplicationSpec struct {
 
@@ -45,6 +46,8 @@ const (
 	SyncPolicyAll    SyncPolicy = "All"
 )
 
+// +k8s:deepcopy-gen=true
+// SyncOptions defines the options for syncing the application
 type SyncOptions struct {
 
 	// +optional

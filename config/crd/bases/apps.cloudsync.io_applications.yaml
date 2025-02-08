@@ -60,6 +60,7 @@ spec:
                 default: 5
                 type: integer
               syncOptions:
+                description: SyncOptions defines the options for syncing the application
                 properties:
                   autoSync:
                     default: true

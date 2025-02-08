@@ -48,6 +48,9 @@ spec:
               clusterURL:
                 description: URL of the cluster
                 type: string
+              tenant:
+                description: Tenant to which the cluster belongs
+                type: string
             required:
             - clusterConfigSecret
             - clusterName

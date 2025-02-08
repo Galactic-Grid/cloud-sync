@@ -18,6 +18,10 @@ type ClusterConfigSpec struct {
 
 	// Secret containing the kubeconfig of the cluster
 	ClusterConfigSecret string `json:"clusterConfigSecret"`
+
+	// +optional
+	// Tenant to which the cluster belongs
+	Tenant string `json:"tenant,omitempty"`
 }
 
 // ClusterConfigStatus defines the observed state of ClusterConfig

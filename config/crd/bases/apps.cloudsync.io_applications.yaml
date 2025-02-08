@@ -56,6 +56,23 @@ spec:
               name:
                 description: Name of the application
                 type: string
+              refreshInterval:
+                default: 5
+                type: integer
+              syncOptions:
+                properties:
+                  autoSync:
+                    default: true
+                    description: AutoSync indicates whether the application should
+                      be synced automatically
+                    type: boolean
+                  syncPolicies:
+                    default:
+                    - All
+                    items:
+                      type: string
+                    type: array
+                type: object
             required:
             - gitConfigRef
             - name

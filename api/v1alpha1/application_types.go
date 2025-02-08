@@ -26,6 +26,35 @@ type ApplicationSpec struct {
 
 	// +optional
 	ClusterConfigRef string `json:"clusterConfigRef,omitempty"`
+
+	// +optional
+	SyncOptions SyncOptions `json:"syncOptions,omitempty"`
+
+	// +optional
+	// +kubebuilder:default=5
+	RefreshInterval int `json:"refreshInterval,omitempty"`
+}
+
+type SyncPolicy string
+
+const (
+	// SyncPolicyNone indicates that the application should not be synced
+	SyncPolicyCreate SyncPolicy = "Create"
+	SyncPolicyUpdate SyncPolicy = "Update"
+	SyncPolicyDelete SyncPolicy = "Delete"
+	SyncPolicyAll    SyncPolicy = "All"
+)
+
+type SyncOptions struct {
+
+	// +optional
+	// +kubebuilder:default=true
+	// AutoSync indicates whether the application should be synced automatically
+	AutoSync bool `json:"autoSync,omitempty"`
+
+	// +optional
+	// +kubebuilder:default={"All"}
+	SyncPolicies []SyncPolicy `json:"syncPolicies,omitempty"`
 }
 
 type GitConfigRef struct {
@@ -44,7 +73,6 @@ type ClusterConfigRef struct {
 }
 
 // +k8s:deepcopy-gen=true
-
 // ApplicationStatus defines the observed state of Application
 type ApplicationStatus struct {
 	// Phase represents the current phase of the application

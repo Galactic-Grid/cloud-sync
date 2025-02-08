@@ -10,6 +10,7 @@ all: build
 .PHONY: generate
 generate: controller-gen ## Generate code
 	$(CONTROLLER_GEN) object paths=./...
+	$(CONTROLLER_GEN) crd paths=./api/... output:crd:dir=./config/crd/bases
 
 .PHONY: build
 build: generate ## Build the project

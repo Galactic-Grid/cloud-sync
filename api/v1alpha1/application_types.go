@@ -18,35 +18,32 @@ type Application struct {
 
 // ApplicationSpec defines the desired state of Application
 type ApplicationSpec struct {
+
 	// Name of the application
-	Provider Provider `json:"provider"`
+	Name string `json:"name"`
 
-	KubeAPIEndpoint string `json:"kubeAPIEndpoint,omitempty"`
-}
-
-// TargetType defines the type of target for the provider
-type TargetType string
-
-const (
-	// TargetTypeDirectory represents a local directory target
-	TargetTypeScript TargetType = "script"
-	// TargetTypeDirectory represents a local directory target
-	TargetTypeYaml TargetType = "yaml"
-)
-
-type Provider struct {
-	RepoUrl string `json:"repoUrl"`
-
-	TargetPath string `json:"targetPath"`
-
-	TargetType TargetType `json:"targetType"`
+	GitConfigRef GitConfigRef `json:"gitConfigRef"`
 
 	// +optional
-	ScriptYamlOutput string `json:"scriptYamlOutput"`
-
-	// +optional
-	TargetRevision string `json:"targetRevision,omitempty"`
+	ClusterConfigRef string `json:"clusterConfigRef,omitempty"`
 }
+
+type GitConfigRef struct {
+
+	// Name of the GitConfig
+	Name string `json:"name"`
+
+	// Revision of the Git repository
+	Revision string `json:"revision"`
+}
+
+type ClusterConfigRef struct {
+
+	// Name of the ClusterConfig
+	Name string `json:"name"`
+}
+
+// +k8s:deepcopy-gen=true
 
 // ApplicationStatus defines the observed state of Application
 type ApplicationStatus struct {
@@ -58,6 +55,8 @@ type ApplicationStatus struct {
 	// +optional
 	Conditions []ApplicationCondition `json:"conditions,omitempty"`
 }
+
+// +k8s:deepcopy-gen=true
 
 // ApplicationCondition describes the state of an application at a certain point
 type ApplicationCondition struct {

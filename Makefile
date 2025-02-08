@@ -14,6 +14,7 @@ generate: controller-gen ## Generate code
 
 .PHONY: build
 build: generate ## Build the project
+	go mod tidy
 	go build -o bin/manager ./...
 
 .PHONY: controller-gen

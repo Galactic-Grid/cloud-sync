@@ -14,8 +14,8 @@ generate: controller-gen ## Generate code
 
 .PHONY: build
 build: generate ## Build the project
-	go mod vendor
 	go mod tidy
+	go mod vendor
 	go build -o bin/manager ./...
 
 manifests: controller-gen ## Generate manifests e.g. CRD, RBAC etc.

@@ -5,7 +5,7 @@ go 1.21
 toolchain go1.23.5
 
 require (
-	github.com/go-logr/logr v1.4.2
+	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-logr/zapr v1.3.0
 	go.uber.org/zap v1.26.0
 	gopkg.in/alecthomas/kingpin.v2 v2.1.0

@@ -1,5 +1,6 @@
 # Cloud Sync Operator
 
+
 Cloud Sync is a Kubernetes operator that implements GitOps principles for continuous deployment and synchronization of Kubernetes resources. Similar to ArgoCD, it uses the gitops-engine to ensure that the desired state in Git repositories is synchronized with the actual state in Kubernetes clusters.
 
 ## Overview
@@ -106,11 +107,11 @@ make manifests
 
 ```
 cloud-sync/
-├── api/              # API definitions
-├── config/           # Kubernetes manifests
-├── controllers/      # Controller logic
-├── pkg/             # Internal packages
-└── cmd/             # Command-line tools
+├── api/
+│   └── v1alpha1/          # API definitions
+├── config/               # Kubernetes manifests
+├── controllers/         # Controller implementation
+└── Makefile             # Build and deployment targets
 ```
 
 ## Contributing

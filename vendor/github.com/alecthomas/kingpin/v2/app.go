@@ -413,10 +413,6 @@ func (a *Application) setDefaults(context *ParseContext) error {
 			if flag.name == "help" {
 				return nil
 			}
-
-			if flag.name == "version" {
-				return nil
-			}
 			flagElements[flag.name] = element
 		}
 	}
@@ -464,17 +460,13 @@ func (a *Application) validateRequired(context *ParseContext) error {
 	}
 
 	// Check required flags and set defaults.
-	var missingFlags []string
 	for _, flag := range context.flags.long {
 		if flagElements[flag.name] == nil {
 			// Check required flags were provided.
 			if flag.needsValue() {
-				missingFlags = append(missingFlags, fmt.Sprintf("'--%s'", flag.name))
+				return fmt.Errorf("required flag --%s not provided", flag.name)
 			}
 		}
-	}
-	if len(missingFlags) != 0 {
-		return fmt.Errorf("required flag(s) %s not provided", strings.Join(missingFlags, ", "))
 	}
 
 	for _, arg := range context.arguments.args {

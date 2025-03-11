@@ -4,7 +4,7 @@ import (
 	"os"
 
 	"github.com/Galactic-Grid/cloud-sync/api/v1alpha1"
-	"github.com/Galactic-Grid/cloud-sync/controllers"
+	controller "github.com/Galactic-Grid/cloud-sync/controllers"
 	"github.com/alecthomas/kingpin/v2"
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
@@ -43,7 +43,7 @@ func main() {
 		kingpin.FatalIfError(err, "Cannot create controller manager")
 	}
 
-	if err := (&controllers.ApplicationReconciler{
+	if err := (&controller.ApplicationReconciler{
 		Client: mgr.GetClient(),
 		Scheme: mgr.GetScheme(),
 		Log:    ctrl.Log.WithName("controllers").WithName("Application"),

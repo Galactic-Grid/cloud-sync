@@ -23,8 +23,25 @@ type ApplicationReconciler struct {
 }
 
 // Reconcile implements reconcile.Reconciler.
-func (r *ApplicationReconciler) Reconcile(context.Context, reconcile.Request) (reconcile.Result, error) {
-	panic("unimplemented")
+func (r *ApplicationReconciler) Reconcile(ctx context.Context, req reconcile.Request) (reconcile.Result, error) {
+	r.Log.Info("Reconciling Application", "name", req.Name)
+
+	application := &v1alpha1.Application{}
+	if err := r.Get(ctx, req.NamespacedName, application); err != nil {
+		return reconcile.Result{}, client.IgnoreNotFound(err)
+	}
+
+	if application.Status.Phase == v1alpha1.ApplicationPhaseSyncing {
+		return ctrl.Result{}, nil
+	}
+
+	if application.Status.Phase == v1alpha1.ApplicationPhaseFailed {
+		return ctrl.Result{}, nil
+	}
+
+	r.Log.Info("Syncing Application", "name", req.Name)
+
+	return ctrl.Result{}, nil
 }
 
 // SetupWithManager sets up the controller with the Manager.

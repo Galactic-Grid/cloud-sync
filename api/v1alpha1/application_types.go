@@ -32,7 +32,7 @@ type ApplicationSpec struct {
 	SyncOptions SyncOptions `json:"syncOptions,omitempty"`
 
 	// +optional
-	// +kubebuilder:default=5
+	// +kubebuilder:default=60
 	RefreshInterval int `json:"refreshInterval,omitempty"`
 }
 
@@ -75,12 +75,21 @@ type ClusterConfigRef struct {
 	Name string `json:"name"`
 }
 
+type Phase string
+
+const (
+	// SyncPolicyNone indicates that the application should not be synced
+	ApplicationPhaseSyncing Phase = "Syncing"
+	ApplicationPhaseReady   Phase = "Ready"
+	ApplicationPhaseFailed  Phase = "Failed"
+)
+
 // +k8s:deepcopy-gen=true
 // ApplicationStatus defines the observed state of Application
 type ApplicationStatus struct {
 	// Phase represents the current phase of the application
 	// +optional
-	Phase string `json:"phase,omitempty"`
+	Phase Phase `json:"phase,omitempty"`
 
 	// Conditions represent the latest available observations of the application's state
 	// +optional
